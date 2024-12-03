@@ -14,10 +14,9 @@ describe('Task 1', () => {
 
         await $('.header__vaulting-container .theme-switcher').click();
 
-        //add a test
+        const bodyColor = await $('.header__content').getCSSProperty('color');
+        await expect(bodyColor.parsed.hex).toEqual('#000000');
         
-        //
-
     });
 
     it('Check that allow to change language to UA', async () => {
