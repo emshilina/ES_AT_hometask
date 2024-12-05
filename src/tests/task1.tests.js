@@ -4,7 +4,7 @@ describe('Task 1', () => {
 
     });
    
-    it('Check the title is correct', async () => {
+   it('Check the title is correct', async () => {
         
         await expect(browser).toHaveTitle('EPAM | Software Engineering & Product Development Services')
 
@@ -45,7 +45,7 @@ describe('Task 1', () => {
 
      it('Check that allow to switch location list by region', async () => {
         
-        //
+        //Check the list of regions
         await expect($('.tabs-23__title.active > .tabs-23__link')).toHaveText('AMERICAS');
         await expect($(':nth-child(2) > .tabs-23__link')).toHaveText('EMEA');
         await expect($(':nth-child(3) > .tabs-23__link')).toHaveText('APAC');
@@ -63,5 +63,18 @@ describe('Task 1', () => {
         await expect($('.tabs-23__item.active > .locations-viewer > .locations-viewer-ui-23 > .locations-viewer-23__carousel > .owl-stage-outer > .owl-stage > .active > .locations-viewer-23__country > .locations-viewer-23__country-btn > .locations-viewer-23__country-title')).toHaveText('CANADA');
 
         
+     });
+
+     it('Check the search function', async () => {
+        
+        //Initiate searching 
+
+        await $('button.header-search__button').click();
+        await $('#new_form_search').setValue('AI');
+        await $('.search-results__action-section button').click();
+
+        //Verify displayed results
+        await expect($('.search-results__counter')).toHaveHTML(expect.stringContaining('results for "AI"'));
+                        
      });
 })
