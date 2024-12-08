@@ -77,4 +77,54 @@ describe('Task 1', () => {
         await expect($('.search-results__counter')).toHaveHTML(expect.stringContaining('results for "AI"'));
                         
      });
+
+     it('Check the form fields validation', async () => {
+        
+        //Open Contact us 
+
+        await $('.header__content > :nth-child(4)').click();
+        
+         //Click Submit button with empty mandatory fields
+
+         await $('.button-ui').click();
+
+        //First name
+        const FirstNameColor = await $(':nth-child(2) > .colctrl-ui-23 > :nth-child(1) > .colctrl__holder > .text-field > .text-field-ui > .form-component__label').getCSSProperty('color');
+        await expect(FirstNameColor.parsed.hex).toEqual('#ff4d40');
+
+         //Last name
+         const LastNameColor = await $(':nth-child(2) > .colctrl__holder > .text-field > .text-field-ui > .form-component__label').getCSSProperty('color');
+         await expect(LastNameColor.parsed.hex).toEqual('#ff4d40');
+
+         //Email
+         const EmailColor = await $(':nth-child(3) > .colctrl-ui-23 > :nth-child(1) > .colctrl__holder > .text-field > .text-field-ui > .form-component__label').getCSSProperty('color');
+         await expect(EmailColor.parsed.hex).toEqual('#ff4d40');
+
+         //Phone
+         const PhoneColor = await $('.phone-ui > .form-component__label').getCSSProperty('color');
+         await expect(PhoneColor.parsed.hex).toEqual('#ff4d40');
+
+         //How did yoy hear aboaut Epam
+         const AboutEpamColor = await $('#_content_epam_en_about_who-we-are_contact_jcr_content_content-container_section_section-par_form_constructor_user_comment_how_hear_about-label').getCSSProperty('color');
+         await expect(AboutEpamColor.parsed.hex).toEqual('#ff4d40');
+
+         //Agreed to process personal data checkbox
+         const PersonalDataChackboxColor = await $(':nth-child(9) > .checkbox-ui > .checkbox__holder').getCSSProperty('color');
+        await expect(PersonalDataChackboxColor.parsed.hex).toEqual('#ff4d40');
+                        
+     });
+
+     it('Check that the Company logo on the header lead to the main page', async () => {
+        
+        //Open About page 
+        await $(':nth-child(4) > .top-navigation__item-text > .top-navigation__item-link').click();
+    
+        //Click to Logo
+        await $('.header__logo-light').click();
+
+        //Verify home page is opened
+        await expect(await browser.getUrl()).toEqual('https://www.epam.com/');
+                        
+     });
+
 })
