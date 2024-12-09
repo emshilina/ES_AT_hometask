@@ -1,3 +1,8 @@
+const path = require('path');
+const fs = require('fs');
+
+global.downloadDir = path.join(__dirname, '../../Downloaded');
+
 exports.config = {
     //
     // ====================
@@ -43,17 +48,37 @@ exports.config = {
     // and 30 processes will get spawned. The property handles how many capabilities
     // from the same test should run tests.
     //
-    maxInstances: 10,
+    maxInstances: 1,
     //
     // If you have trouble getting all important capabilities together, check out the
     // Sauce Labs platform configurator - a great tool to configure your capabilities:
     // https://saucelabs.com/platform/platform-configurator
     //
     capabilities: [{
-        browserName: 'chrome'
-    }, {
-        browserName: 'firefox'
-    }],
+        browserName: 'chrome',
+        'goog:chromeOptions': {
+            prefs: {
+                'directory_upgrade': true,
+                'prompt_for_download': false,
+                'download.default_directory': downloadDir,
+              }
+        }
+    }, 
+    
+   {
+        browserName: 'firefox',
+        "moz:debuggerAddress": true,
+        "moz:firefoxOptions": {
+        args: ['-headless'],
+        prefs: {
+            "browser.download.dir": downloadDir,
+            "browser.download.folderList": 2,
+            "browser.download.manager.showWhenStarting": false,
+            "browser.helperApps.neverAsk.saveToDisk": "*/*",
+        }
+    }
+    }
+],
 
     //
     // ===================

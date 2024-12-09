@@ -1,3 +1,5 @@
+const fs = require('fs');
+
 describe('Task 1', () => {
     beforeEach(async () => {
         await browser.url('https://www.epam.com/');
@@ -90,27 +92,27 @@ describe('Task 1', () => {
 
         //First name
         const FirstNameColor = await $(':nth-child(2) > .colctrl-ui-23 > :nth-child(1) > .colctrl__holder > .text-field > .text-field-ui > .form-component__label').getCSSProperty('color');
-        await expect(FirstNameColor.parsed.hex).toEqual('#ff4d40');
+        await expect(FirstNameColor.parsed.hex).toEqual('#e80202');
 
          //Last name
          const LastNameColor = await $(':nth-child(2) > .colctrl__holder > .text-field > .text-field-ui > .form-component__label').getCSSProperty('color');
-         await expect(LastNameColor.parsed.hex).toEqual('#ff4d40');
+         await expect(LastNameColor.parsed.hex).toEqual('#e80202');
 
          //Email
          const EmailColor = await $(':nth-child(3) > .colctrl-ui-23 > :nth-child(1) > .colctrl__holder > .text-field > .text-field-ui > .form-component__label').getCSSProperty('color');
-         await expect(EmailColor.parsed.hex).toEqual('#ff4d40');
+         await expect(EmailColor.parsed.hex).toEqual('#e80202');
 
          //Phone
          const PhoneColor = await $('.phone-ui > .form-component__label').getCSSProperty('color');
-         await expect(PhoneColor.parsed.hex).toEqual('#ff4d40');
+         await expect(PhoneColor.parsed.hex).toEqual('#e80202');
 
          //How did yoy hear aboaut Epam
          const AboutEpamColor = await $('#_content_epam_en_about_who-we-are_contact_jcr_content_content-container_section_section-par_form_constructor_user_comment_how_hear_about-label').getCSSProperty('color');
-         await expect(AboutEpamColor.parsed.hex).toEqual('#ff4d40');
+         await expect(AboutEpamColor.parsed.hex).toEqual('#e80202');
 
          //Agreed to process personal data checkbox
          const PersonalDataChackboxColor = await $(':nth-child(9) > .checkbox-ui > .checkbox__holder').getCSSProperty('color');
-        await expect(PersonalDataChackboxColor.parsed.hex).toEqual('#ff4d40');
+         await expect(PersonalDataChackboxColor.parsed.hex).toEqual('#e80202');
                         
      });
 
@@ -124,6 +126,30 @@ describe('Task 1', () => {
 
         //Verify home page is opened
         await expect(await browser.getUrl()).toEqual('https://www.epam.com/');
+                        
+     });
+
+     it('Check that allows to download report', async () => {
+        
+        console.log(global.downloadDir);
+        //Open About page 
+        await $(':nth-child(4) > .top-navigation__item-text > .top-navigation__item-link').click();
+    
+        //Download the report
+        await $('.colctrl__holder > .button > .button__wrapper > a.button-ui-23').click();
+        await (new Promise(resolve => setTimeout(resolve, 5000)));
+
+        //Return downloaded file names
+        const testFolder = './Downloaded/';
+        const files = [...fs.readdirSync(testFolder)];
+        
+        //Check the file name + extension is correct
+        await expect(files[0]).toEqual('EPAM_Corporate_Overview_Q4_EOY.pdf');
+        
+        //Remove the file
+        var filePath = './Downloaded/EPAM_Corporate_Overview_Q4_EOY.pdf'; 
+        fs.unlinkSync(filePath);
+        
                         
      });
 
