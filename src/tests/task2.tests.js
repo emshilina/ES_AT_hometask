@@ -45,8 +45,18 @@ describe('Demo web shop tests', () => {
         await $('.ico-logout').click();
     });
 
-    it('Second test', async () => {
-       
+    it('Verify that allows login a User', async () => {
+        //Open login page
+        await $('.ico-login').click();
+
+        //Fill in Email and password and Log in
+        await $('.inputs #Email').setValue(Email);
+        await $('.inputs #Password').setValue(Password);
+
+        await $('.login-page form input.button-1').click();
+
+         //Check login is successful
+         await expect($('.header-links .account')).toHaveText(Email);
 
     });
 
