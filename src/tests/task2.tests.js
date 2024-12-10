@@ -76,4 +76,14 @@ await browser.url('https://demowebshop.tricentis.com/');
 
     });
 
+    it('Verify that Computers group has 3 sub-groups with correct names', async () => {
+        //Open Computers group
+        await $('.top-menu [href="/computers"]').click();
+
+        //Verify Computers group - main
+        await expect($('.sub-category-item .title [href="/desktops"]')).toHaveText("Desktops");
+        await expect($('.sub-category-item .title [href="/notebooks"]')).toHaveText("Notebooks");
+        await expect($('.sub-category-item .title [href="/accessories"]')).toHaveText("Accessories");
+    });
+
 })
