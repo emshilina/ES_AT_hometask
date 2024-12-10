@@ -199,8 +199,11 @@ exports.config = {
      * Hook that gets executed before the suite starts
      * @param {object} suite suite details
      */
-    // beforeSuite: function (suite) {
-    // },
+    /*beforeSuite: function (suite) {
+                      
+   },*/
+
+    
     /**
      * Function to be executed before a test (in Mocha/Jasmine) starts.
      */
