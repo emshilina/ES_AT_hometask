@@ -3,7 +3,9 @@ describe('Demo web shop tests', () => {
         
     });*/
 
-        var FirstName = "";
+    //Return from comments for final text (proceed with the same login and password)
+    //Start
+    /*    var FirstName = "";
         var LastName = "";
         var Email = "";
         var Paasword = "";
@@ -44,6 +46,20 @@ describe('Demo web shop tests', () => {
         //Logout for the test 2
         await $('.ico-logout').click();
     });
+
+    */
+   //Finish
+//-------------------------------------------------------
+
+//Delete after all tests are done
+//Start
+Email = "johnsmith@testmail.com";
+Password = "johnsmithpswrd";
+it('Temporary open site', async () => {
+await browser.url('https://demowebshop.tricentis.com/');
+});
+//Finish
+//-------------------------------------------------------
 
     it('Verify that allows login a User', async () => {
         //Open login page
