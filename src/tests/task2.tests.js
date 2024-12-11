@@ -86,4 +86,48 @@ await browser.url('https://demowebshop.tricentis.com/');
         await expect($('.sub-category-item .title [href="/accessories"]')).toHaveText("Accessories");
     });
 
+    /*it('Verify that allows sorting items (different options)', async () => {
+        //Open Computers/Desktops page
+        await browser.url('https://demowebshop.tricentis.com/desktops');
+
+        //Sort items by Name:A to Z and verify results
+        await $('.product-sorting #products-orderby').click();
+        await $('.product-sorting [value="https://demowebshop.tricentis.com/desktops?orderby=5"]').click();
+
+        
+    });*/
+
+    it('Verify that allows changing number of items on page', async () => {
+        //Open Apparel & Shoes page (amount of elements > 12)
+        await browser.url('https://demowebshop.tricentis.com/apparel-shoes');
+
+        //Change Display to page value to 4
+        await $('.product-page-size #products-pagesize').click();
+        await $('.product-page-size [value="https://demowebshop.tricentis.com/apparel-shoes?pagesize=4"]').click();
+
+        //Validate that 4 elements per page are displayed
+        var elements = $$('.product-item');
+        await expect(elements).toBeElementsArrayOfSize(4);
+        await expect($('.pager .individual-page [href="/apparel-shoes?pagenumber=2"]').toBeDisplayed());
+        
+        //Change Display to page value to 8
+        await $('.product-page-size #products-pagesize').click();
+        await $('.product-page-size [value="https://demowebshop.tricentis.com/apparel-shoes?pagesize=8"]').click();
+
+        //Validate that 8 elements per page are displayed
+        var elements = $$('.product-item');
+        await expect(elements).toBeElementsArrayOfSize(8);
+        await expect($('.pager .individual-page [href="/apparel-shoes?pagenumber=2"]').toBeDisplayed());
+
+        //Change Display to page value to 12
+        await $('.product-page-size #products-pagesize').click();
+        await $('.product-page-size [value="https://demowebshop.tricentis.com/apparel-shoes?pagesize=12"]').click();
+
+        //Validate that 12 elements per page are displayed
+        var elements = $$('.product-item');
+        await expect(elements).toBeElementsArrayOfSize(12);
+        await expect($('.pager .individual-page [href="/apparel-shoes?pagenumber=2"]').toBeDisplayed());
+        
+    });
+
 })
