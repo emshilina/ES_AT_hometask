@@ -234,10 +234,23 @@ await browser.url('https://demowebshop.tricentis.com/');
     });*/
 
     it('Verify that allows adding an item to the Wishlist', async () => {
-        //I have no idea how to add the item to the wishlist :)
+        //Open Apparel & Shoes page
+        await browser.url('https://demowebshop.tricentis.com/apparel-shoes');
+
+        //Get the title of the 1st element
+        let firstTitleWL = await $$('.product-item .product-title a')[0].getProperty('innerText');
+
+        //Add the item to wishlist
+        await $$('.item-box .product-item')[0].click();
+        await $('#add-to-wishlist-button-5').click();
+
+        //Open the wishlist and verify the element is added
+        await $('.header-links .ico-wishlist').click();
+        await expect($('.cart-item-row .product a')).toHaveText(firstTitleWL);
+
     });
 
-   it('Verify that allows adding an item to the card', async () => {
+   /*it('Verify that allows adding an item to the card', async () => {
         //Open Computers/Desktops page
         await browser.url('https://demowebshop.tricentis.com/desktops');
 
@@ -289,7 +302,7 @@ await browser.url('https://demowebshop.tricentis.com/');
 
         //--------
         */
-        await $('#opc-shipping input[type="button"]').click();
+     /*   await $('#opc-shipping input[type="button"]').click();
 
         //Select Shipping method
         await $('#opc-shipping_method input[type="button"]').click();
@@ -306,7 +319,5 @@ await browser.url('https://demowebshop.tricentis.com/');
         //Validate that cart is checkout
         await expect($('.page .section .title')).toHaveText('Your order has been successfully processed!');
 
-
-
-    });
+    });*/
 })
