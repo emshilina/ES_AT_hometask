@@ -7,7 +7,7 @@ describe('Demo web shop tests', () => {
 
     //Return from comments for final text (proceed with the same login and password)
     //Start
-    /*    var FirstName = "";
+        var FirstName = "";
         var LastName = "";
         var Email = "";
         var Paasword = "";
@@ -49,19 +49,20 @@ describe('Demo web shop tests', () => {
         await $('.ico-logout').click();
     });
 
-    */
+    
    //Finish
 //-------------------------------------------------------
 
 //Delete after all tests are done
 //Start
-Email = "johnsmith@testmail.com";
+/*Email = "johnsmith@testmail.com";
 Password = "johnsmithpswrd";
 it('Temporary open site', async () => {
 await browser.url('https://demowebshop.tricentis.com/');
 });
 //Finish
 //-------------------------------------------------------
+*/
 
     it('Verify that allows login a User', async () => {
         //Open login page
@@ -289,6 +290,16 @@ await browser.url('https://demowebshop.tricentis.com/');
         await $('.checkout-buttons #checkout').click();
 
         //Fill in Billing address
+        //Fill in new address
+        await $('#BillingNewAddress_CountryId').click();
+        await $('#BillingNewAddress_CountryId [value="1"]').click();
+        await $('#BillingNewAddress_City').setValue('New York');
+        await $('#BillingNewAddress_Address1').setValue('123 main street');
+        await $('#BillingNewAddress_ZipPostalCode').setValue('12345');
+        await $('#BillingNewAddress_PhoneNumber').setValue('123456789');
+
+        //--------
+
         await $('#opc-billing input[type="button"]').click();
 
         //Fill in Shipping address
@@ -298,10 +309,9 @@ await browser.url('https://demowebshop.tricentis.com/');
         await $('#ShippingNewAddress_City').setValue('New York');
         await $('#ShippingNewAddress_Address1').setValue('123 main street');
         await $('#ShippingNewAddress_ZipPostalCode').setValue('12345');
-        await $('#ShippingNewAddress_PhoneNumber').setValue('123456789');
+        await $('#ShippingNewAddress_PhoneNumber').setValue('123456789');*/
 
         //--------
-        */
         await $('#opc-shipping input[type="button"]').click();
 
         //Select Shipping method
