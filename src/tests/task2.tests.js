@@ -1,3 +1,5 @@
+import { equal } from 'node:assert';
+
 describe('Demo web shop tests', () => {
     /*beforeEach(async () => {
         
@@ -86,18 +88,119 @@ await browser.url('https://demowebshop.tricentis.com/');
         await expect($('.sub-category-item .title [href="/accessories"]')).toHaveText("Accessories");
     });
 
-    /*it('Verify that allows sorting items (different options)', async () => {
+    it('Verify that allows sorting items (different options)', async () => {
         //Open Computers/Desktops page
         await browser.url('https://demowebshop.tricentis.com/desktops');
 
         //Sort items by Name:A to Z and verify results
         await $('.product-sorting #products-orderby').click();
         await $('.product-sorting [value="https://demowebshop.tricentis.com/desktops?orderby=5"]').click();
-
+        var elements = $$('.product-item .product-title a');
+        let elementsTitles = [];
+        let elementsTitlesSortedAZ = [];
         
-    });*/
+        for(let i = 0; i < 6; i++) 
+        {
+            elementsTitles[i] = await elements[i].getProperty('innerText');
+            elementsTitlesSortedAZ[i] = await elements[i].getProperty('innerText');
+        };
 
-    it('Verify that allows changing number of items on page', async () => {
+        elementsTitlesSortedAZ = elementsTitlesSortedAZ.sort();
+        
+        let elementsTitlesString = JSON.stringify(elementsTitles);
+        let elementsTitlesSortedAZString = JSON.stringify(elementsTitlesSortedAZ);
+
+        equal(elementsTitlesSortedAZString, elementsTitlesString);  
+        
+        //Sort items by Name: Z to A and verify results
+        await $('.product-sorting #products-orderby').click();
+        await $('.product-sorting [value="https://demowebshop.tricentis.com/desktops?orderby=6"]').click();
+        var elements2 = $$('.product-item .product-title a');
+        let elementsTitles2 = [];
+        let elementsTitlesSortedZA = [];
+        
+        for(let i = 0; i < 6; i++) 
+        {
+            elementsTitles2[i] = await elements2[i].getProperty('innerText');
+            elementsTitlesSortedZA[i] = await elements2[i].getProperty('innerText');
+        };
+
+        elementsTitlesSortedZA = elementsTitlesSortedAZ.sort().reverse();
+        
+        let elementsTitlesString2 = JSON.stringify(elementsTitles2);
+        let elementsTitlesSortedZAZString = JSON.stringify(elementsTitlesSortedZA);
+
+        equal(elementsTitlesSortedZAZString, elementsTitlesString2); 
+
+        //Sort items by Price: Low to High and verify results
+        await $('.product-sorting #products-orderby').click();
+        await $('.product-sorting [value="https://demowebshop.tricentis.com/desktops?orderby=10"]').click();
+        
+        var elements3 = $$('.product-item .add-info .prices .price');
+        
+        let elementsPrices = [];
+        let elementsPricesSortedLowtoHigh = [];
+
+        for(let i = 0; i < 6; i++) 
+            {
+                elementsPrices[i] = await elements3[i].getProperty('innerText');
+                elementsPricesSortedLowtoHigh[i] = await elements3[i].getProperty('innerText');
+            };
+        
+        elementsPricesSortedLowtoHigh = elementsPricesSortedLowtoHigh.sort(function(a, b) {return a - b;});
+        
+        let elementsPricesString = JSON.stringify(elementsPrices);
+        let elementsPricesSortedLowtoHighString = JSON.stringify(elementsPricesSortedLowtoHigh);
+
+        equal(elementsPricesSortedLowtoHighString, elementsPricesString);
+        
+         //Sort items by Price: High to Low and verify results
+         await $('.product-sorting #products-orderby').click();
+         await $('.product-sorting [value="https://demowebshop.tricentis.com/desktops?orderby=11"]').click();
+         
+         var elements4 = $$('.product-item .add-info .prices .price');
+         
+         let elementsPrices2 = [];
+         let elementsPricesSortedHightoLow = [];
+ 
+         for(let i = 0; i < 6; i++) 
+             {
+                elementsPrices2[i] = await elements4[i].getProperty('innerText');
+                elementsPricesSortedHightoLow[i] = await elements4[i].getProperty('innerText');
+             };
+         
+             elementsPricesSortedHightoLow = elementsPricesSortedHightoLow.sort(function(a, b) {return a - b;}).reverse();
+         
+         let elementsPricesString2 = JSON.stringify(elementsPrices2);
+         let elementsPricesSortedHightoLowString = JSON.stringify(elementsPricesSortedHightoLow);
+ 
+         equal(elementsPricesSortedHightoLowString, elementsPricesString2);
+
+         //Sort items by Created on and verify results
+         await $('.product-sorting #products-orderby').click();
+         await $('.product-sorting [value="https://demowebshop.tricentis.com/desktops?orderby=15"]').click();
+         
+         var elements5 = $$('.item-box .product-item');
+         
+         let elementsIDs = [];
+         let elementsIDsSorted = [];
+ 
+         for(let i = 0; i < 6; i++) 
+             {
+                elementsIDs[i] = await elements5[i].getAttribute('data-productid');
+                elementsIDsSorted[i] = await elements5[i].getAttribute('data-productid');
+             };
+         
+             elementsIDsSorted = elementsIDsSorted.sort(function(a, b) {return a - b;}).reverse();
+         
+         let elementsIDsString = JSON.stringify(elementsIDs);
+         let elementsIDsSortedString = JSON.stringify(elementsIDsSorted);
+
+         equal(elementsIDsSortedString, elementsIDsString);
+        
+    });
+
+   it('Verify that allows changing number of items on page', async () => {
         //Open Apparel & Shoes page (amount of elements > 12)
         await browser.url('https://demowebshop.tricentis.com/apparel-shoes');
 
