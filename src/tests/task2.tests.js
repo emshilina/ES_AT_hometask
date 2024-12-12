@@ -262,4 +262,51 @@ await browser.url('https://demowebshop.tricentis.com/');
         await expect($('.page .order-summary-content')).toHaveText('Your Shopping Cart is empty!');
     });
 
+    it('Verify that allows checkout an item', async () => {
+        //Open Computers/Desktops page
+        await browser.url('https://demowebshop.tricentis.com/desktops');
+
+        //Add the item to cart and open cart
+        await $$('.item-box .product-item')[0].click();
+        await $('#add-to-cart-button-72').click();
+        await $('.header-links .ico-cart').click();
+        
+        //Accept terms of service and initiate checkout
+        await $('.terms-of-service #termsofservice').click();
+        await $('.checkout-buttons #checkout').click();
+
+        //Fill in Billing address
+        await $('#opc-billing input[type="button"]').click();
+
+        //Fill in Shipping address
+        //Fill in new address
+        /*await $('#ShippingNewAddress_CountryId').click();
+        await $('#BillingNewAddress_CountryId [value="1"]').click();
+        await $('#ShippingNewAddress_City').setValue('New York');
+        await $('#ShippingNewAddress_Address1').setValue('123 main street');
+        await $('#ShippingNewAddress_ZipPostalCode').setValue('12345');
+        await $('#ShippingNewAddress_PhoneNumber').setValue('123456789');
+
+        //--------
+        */
+        await $('#opc-shipping input[type="button"]').click();
+
+        //Select Shipping method
+        await $('#opc-shipping_method input[type="button"]').click();
+
+        //Select Payment method
+        await $('#opc-payment_method input[type="button"]').click();
+
+        //Confirm Payment information
+        await $('#opc-payment_info input[type="button"]').click();
+
+        //Confirm order
+        await $('#opc-confirm_order input[type="button"]').click();
+
+        //Validate that cart is checkout
+        await expect($('.page .section .title')).toHaveText('Your order has been successfully processed!');
+
+
+
+    });
 })
