@@ -251,9 +251,15 @@ await browser.url('https://demowebshop.tricentis.com/');
         //Open the cart and verify the element is added
         await $('.header-links .ico-cart').click();
         await expect($('.cart-item-row .product-name')).toHaveText(firstTitle);
-        
-        
-        
+    });
+
+    it('Verify that allows removing an item from the card', async () => {
+        //Select the element to remove and update the card
+        await $('.cart-item-row [name="removefromcart"]').click();
+        await $('.buttons [name="updatecart"').click();
+
+        //Verify the element is removed
+        await expect($('.page .order-summary-content')).toHaveText('Your Shopping Cart is empty!');
     });
 
 })
