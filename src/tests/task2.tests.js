@@ -78,7 +78,7 @@ await browser.url('https://demowebshop.tricentis.com/');
 
     });
 
-   /* it('Verify that Computers group has 3 sub-groups with correct names', async () => {
+   it('Verify that Computers group has 3 sub-groups with correct names', async () => {
         //Open Computers group
         await $('.top-menu [href="/computers"]').click();
 
@@ -231,7 +231,7 @@ await browser.url('https://demowebshop.tricentis.com/');
         await expect(elements).toBeElementsArrayOfSize(12);
         await expect($('.pager .individual-page [href="/apparel-shoes?pagenumber=2"]').toBeDisplayed());
         
-    });*/
+    });
 
     it('Verify that allows adding an item to the Wishlist', async () => {
         //Open Apparel & Shoes page
@@ -250,7 +250,7 @@ await browser.url('https://demowebshop.tricentis.com/');
 
     });
 
-   /*it('Verify that allows adding an item to the card', async () => {
+   it('Verify that allows adding an item to the card', async () => {
         //Open Computers/Desktops page
         await browser.url('https://demowebshop.tricentis.com/desktops');
 
@@ -302,7 +302,7 @@ await browser.url('https://demowebshop.tricentis.com/');
 
         //--------
         */
-     /*   await $('#opc-shipping input[type="button"]').click();
+        await $('#opc-shipping input[type="button"]').click();
 
         //Select Shipping method
         await $('#opc-shipping_method input[type="button"]').click();
@@ -319,5 +319,5 @@ await browser.url('https://demowebshop.tricentis.com/');
         //Validate that cart is checkout
         await expect($('.page .section .title')).toHaveText('Your order has been successfully processed!');
 
-    });*/
+    });
 })
