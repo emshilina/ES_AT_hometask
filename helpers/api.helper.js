@@ -1,12 +1,13 @@
 const axios = require("axios");
 const {TEST_URL} = require("../config/endpoints");
 
-const sendRequest = async (url, data = null, method = "get") => {
+const sendRequest = async (url, data = null, method = "get", headers = {}) => {
     try {
         const response = await axios({
             method,
             url: `${TEST_URL}/${url}`,
-            headers: {},
+            //headers: {},
+            headers,
             data
         });
         return{

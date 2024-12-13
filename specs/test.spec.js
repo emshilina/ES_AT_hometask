@@ -3,8 +3,8 @@ const {sendRequest} = require("../helpers/api.helper");
 const testData = require("../config/data.json");
 const ListOfUsers = require("../config/ListOfUsers.json");
 const petData = require("../config/petData.json");
-let PetId = '';
-const {TEST_URL} = require("../config/endpoints");
+//let PetId = '';
+//const {TEST_URL} = require("../config/endpoints");
 
 describe ("Pet shop tests", () => {
 
@@ -48,22 +48,16 @@ describe ("Pet shop tests", () => {
     });
 
    it("Verify that allows updating Pet image", async() =>{
-        console.log(PetId);
         const formData = new FormData();
         formData.append("additionalMetadata", "4444");
         formData.append("file", "../config/images/parrot.jpg");
-        
-        const response = await axios({
-                    url: `${TEST_URL}/pet/${petData.id}/uploadImage`,
-                    method: "POST",
-                    data: formData,
-                    headers: {
-                      "Content-Type": "multipart/form-data"
-                    },
-                });
-               
+        const header = {
+            "Content-Type": "multipart/form-data"
+          };
 
-      expect(response.status).to.equal(200);
+        const response = await sendRequest(`pet/${petData.id}/uploadImage`, formData, "post", header)
+        
+        expect(response.status).to.equal(200);
              
     });
 
