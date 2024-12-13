@@ -1,7 +1,10 @@
+const axios = require("axios");
 const {sendRequest} = require("../helpers/api.helper");
 const testData = require("../config/data.json");
 const ListOfUsers = require("../config/ListOfUsers.json");
 const petData = require("../config/petData.json");
+let PetId = '';
+const {TEST_URL} = require("../config/endpoints");
 
 describe ("Pet shop tests", () => {
 
@@ -43,5 +46,41 @@ describe ("Pet shop tests", () => {
         expect(response.data.name).to.equal(petData.name);
 
     });
+
+   it("Verify that allows updating Pet image", async() =>{
+        console.log(PetId);
+        const formData = new FormData();
+        formData.append("additionalMetadata", "4444");
+        formData.append("file", "../config/images/parrot.jpg");
+        
+        const response = await axios({
+                    url: `${TEST_URL}/pet/${petData.id}/uploadImage`,
+                    method: "POST",
+                    data: formData,
+                    headers: {
+                      "Content-Type": "multipart/form-data"
+                    },
+                });
+               
+
+      expect(response.status).to.equal(200);
+             
+    });
+
+    
+   /* it("Verify that allows updating Pet name and status", async() =>{
+        petDataUpdated ={
+            name: 'Kesha',
+            status: 'not available',
+        };
+        const response = await sendRequest(`pet/${PetId}`, petDataUpdated, "post")
+        expect(response.status).to.equal(200);
+        expect(response.data.name).to.equal(petDataUpdated.name);
+
+        
+        
+    });*/
+
+  
 
 });
