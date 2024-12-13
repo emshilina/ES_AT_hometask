@@ -7,10 +7,11 @@ describe('Demo web shop tests', () => {
 
     //Return from comments for final text (proceed with the same login and password)
     //Start
+    //User credentials generation
         var FirstName = "";
         var LastName = "";
         var Email = "";
-        var Paasword = "";
+        var Password = "";
         var symbols = "abcdefghijklmnopqrstuvwxyz";
 
         for( var i=0; i < 5; i++ ) {
