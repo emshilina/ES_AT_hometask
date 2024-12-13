@@ -51,30 +51,35 @@ describe ("Pet shop tests", () => {
         const formData = new FormData();
         formData.append("additionalMetadata", "4444");
         formData.append("file", "../config/images/parrot.jpg");
+
         const header = {
             "Content-Type": "multipart/form-data"
           };
 
-        const response = await sendRequest(`pet/${petData.id}/uploadImage`, formData, "post", header)
-        
+        const response = await sendRequest(`pet/${petData.id}/uploadImage`, formData, "post", header);
         expect(response.status).to.equal(200);
-             
+
     });
 
-    
-   /* it("Verify that allows updating Pet name and status", async() =>{
-        petDataUpdated ={
-            name: 'Kesha',
-            status: 'not available',
-        };
-        const response = await sendRequest(`pet/${PetId}`, petDataUpdated, "post")
+    it("Verify that allows updating Pet name and status", async() =>{
+        const formData = new URLSearchParams();
+        formData.append("name", "kesha");
+        formData.append("status", "sold");
+
+        const header = {
+            "Content-Type": "application/x-www-form-urlencoded"
+          };
+
+        const response = await sendRequest(`pet/${petData.id}`, formData, "post", header);
+        
+                
         expect(response.status).to.equal(200);
-        expect(response.data.name).to.equal(petDataUpdated.name);
-
         
-        
-    });*/
+        const response2 = await sendRequest(`pet/${petData.id}`);
+        expect(response2.data.name).to.equal(formData.get("name"));
+        expect(response2.data.status).to.equal(formData.get("status"));
 
-  
+             
+    });
 
 });
