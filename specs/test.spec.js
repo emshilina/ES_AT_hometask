@@ -1,5 +1,6 @@
 const {sendRequest} = require("../helpers/api.helper");
 const testData = require("../config/data.json");
+const ListOfUsers = require("../config/ListOfUsers.json");
 
 describe ("Pet shop tests", () => {
 
@@ -22,4 +23,19 @@ describe ("Pet shop tests", () => {
         expect(response.status).to.equal(200);
         
     });
+
+    it("Verify that allows creating the list of Users", async() =>{
+        const response = await sendRequest("user/createWithArray", ListOfUsers, "post")
+        expect(response.status).to.equal(200);
+
+    });
+
+    it("Verify that allows Log out User", async() =>{
+        
+        const response = await sendRequest('user/logout');
+        expect(response.status).to.equal(200);
+    });
+
+
+
 });
