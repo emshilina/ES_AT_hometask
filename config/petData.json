@@ -1,0 +1,18 @@
+{
+    "id": 0,
+    "category": {
+      "id": 0,
+      "name": "Birds"
+    },
+    "name": "harry",
+    "photoUrls": [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTS_uCP9uz9S9_q19f9jYp8f0dv3PKAlJKpJg&s"
+    ],
+    "tags": [
+      {
+        "id": 0,
+        "name": "petbirds"
+      }
+    ],
+    "status": "available"
+  }

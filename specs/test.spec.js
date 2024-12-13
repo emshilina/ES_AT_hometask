@@ -1,13 +1,14 @@
 const {sendRequest} = require("../helpers/api.helper");
 const testData = require("../config/data.json");
 const ListOfUsers = require("../config/ListOfUsers.json");
+const petData = require("../config/petData.json");
 
 describe ("Pet shop tests", () => {
 
     it("Verify that allows creating a User", async() =>{
         const response = await sendRequest("user", testData, "post")
         expect(response.status).to.equal(200);
-
+                
         const response2 = await sendRequest(`user/${testData.username}`);
         expect(response2.data.username).to.equal(testData.username);
     });
@@ -36,6 +37,11 @@ describe ("Pet shop tests", () => {
         expect(response.status).to.equal(200);
     });
 
+    it("Verify that allows adding a new Pet", async() =>{
+        const response = await sendRequest("pet", petData, "post")
+        expect(response.status).to.equal(200);
+        expect(response.data.name).to.equal(petData.name);
 
+    });
 
 });
