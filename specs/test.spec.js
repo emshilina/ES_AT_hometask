@@ -3,6 +3,7 @@ const {sendRequest} = require("../helpers/api.helper");
 const testData = require("../config/data.json");
 const ListOfUsers = require("../config/ListOfUsers.json");
 const petData = require("../config/petData.json");
+const {api_key} = require("../config/endpoints");
 
 describe ("Pet shop tests", () => {
 
@@ -82,14 +83,15 @@ describe ("Pet shop tests", () => {
 
     it("Verify that allows deleting Pet ", async() =>{
         const header = {
-            "api_key": "5646474"
-          };
-
+           "api_key": api_key
+        };
+         
         const response = await sendRequest(`pet/${petData.id}`, data = null, "delete", header);
         expect(response.status).to.equal(200);
         
         const response2 = await sendRequest(`pet/${petData.id}`);
         expect(response2.status).to.equal(404);
+        
     });
 
 });
